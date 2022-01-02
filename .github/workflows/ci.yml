@@ -17,8 +17,9 @@ jobs:
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
-          --health-timout 5s
+          --health-timeout 5s
           --health-retries 5
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -32,21 +33,21 @@ jobs:
         uses: actions/cache@v2
         with:
           path: vendor/bundle
-          key: ${{runner.os}}-gems-${{hashFiles('**/Gemfile.lock')}}
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
           restore-keys: |
-            ${{runner.os}}-gems-
-
+            ${{ runner.os }}-gems-
       - name: Install gems
         run: |
           bundle install --jobs 4 --retry 3
 
-      - name: Analyze with Rubocop
+      - name: Analyze with RuboCop
         run: bundle exec rubocop
 
       - name: Analyze with bundler audit
         run: |
           gem install bundler-audit
           bundle-audit check --update
+
       - name: Setup environment variables
         run: cp .env.test.template .env.test
 
