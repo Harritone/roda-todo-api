@@ -10,7 +10,7 @@ Application.boot(:logger) do
     logger = Logger.new($stdout)
 
     # Because the Logger's level is set to WARN, only warning, error and fatal messages are recorded
-    logger.level = Logger::Warn if Application.env == 'test'
+    logger.level = Logger::WARN if Application.env == 'test'
 
     # Register logger component
     register(:logger, logger)

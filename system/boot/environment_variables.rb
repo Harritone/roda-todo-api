@@ -1,15 +1,16 @@
 # frozen_string_literal: true
 
-# This file contains setup for environment variables using Dotenv
+# This file contains setup for environment variables using Dotenv.
 
-Application.boot(:enviroment_variables) do
+Application.boot(:environment_variables) do
   start do
-    # Get Application current environment
+    # Get Application current environment.
     env = Application.env
 
-    # Load environment variables if current env is development or test
+    # Load environment variables if current environment is development or test.
     if %w[development test].include?(env)
       require 'dotenv'
+
       Dotenv.load('.env', ".env.#{env}")
     end
   end

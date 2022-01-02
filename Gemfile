@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.3'
+ruby '3.0.0'
 
 # Routing Tree Web Toolkit.
 gem 'roda', '>= 3.41'
