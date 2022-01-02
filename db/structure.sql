@@ -58,6 +58,36 @@ CREATE TABLE public.schema_info (
 
 
 --
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users (
+    id uuid DEFAULT public.uuid_generate_v4() NOT NULL,
+    email public.citext NOT NULL,
+    password_digest text NOT NULL,
+    authentication_token text NOT NULL,
+    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+);
+
+
+--
+-- Name: users users_authentication_token_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_authentication_token_key UNIQUE (authentication_token);
+
+
+--
+-- Name: users users_email_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_email_key UNIQUE (email);
+
+
+--
 -- PostgreSQL database dump complete
 --
 
