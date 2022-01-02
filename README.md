@@ -40,7 +40,7 @@ use following instructions:
 
 1. To migrate database in development environment use: `rake db:migrate`
 2. To migrate database in test environment use: `RACK_ENV=test rake db:migrate`
-3. To migrate database in production environment use: `RACK_ENV=production rake db:migrate`
+3. To migrate database in production environment use: `RACK_ENV=production rake db:migrate`.
 
 ### Running the app
 
