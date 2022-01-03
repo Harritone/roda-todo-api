@@ -170,7 +170,7 @@ describe User, type: :model do
     end
 
     context 'when password is valid' do
-      it 'returns User objec' do
+      it 'returns User object' do
         expect(user.authenticate('password')).to eq user
       end
     end
