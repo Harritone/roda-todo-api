@@ -28,6 +28,9 @@ class App < Roda
     elsif e.instance_of?(Sequel::ValidationFailed)
       error_object    = e.model.errors
       response.status = 422
+    elsif e.instance_of?(Exceptions::InvalidEmailOrPassword)
+      error_object    = { error: I18n.t('invalid_email_or_password') }
+      response.status = 401
     else
       error_object    = { error: I18n.t('something_went_wrong') }
       response.status = 500
