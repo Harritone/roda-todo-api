@@ -21,7 +21,20 @@ class App < Roda
   plugin :symbol_matchers
 
   # Adds ability to automatically handle errors raised by the application.
-  plugin :error_handler
+  plugin :error_handler do |e|
+    if e.instance_of?(Exceptions::InvalidParamsError)
+      error_object    = e.object
+      response.status = 422
+    elsif e.instance_of?(Sequel::ValidationFailed)
+      error_object    = e.model.errors
+      response.status = 422
+    else
+      error_object    = { error: I18n.t('something_went_wrong') }
+      response.status = 500
+    end
+
+    respnse.write(error_object.to_json)
+  end
 
   # Allows the default headers for responses.
   plugin :default_headers,
