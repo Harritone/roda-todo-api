@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 describe 'DELETE /api/v1/logout', type: :request do
-
   include_examples 'authorization check', 'delete', '/api/v1/logout'
 
   context 'when Authorization headers contains valid token' do

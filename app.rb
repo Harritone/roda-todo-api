@@ -75,8 +75,6 @@ class App < Roda
     r.on('api') do
       r.on('v1') do
         r.post('sign_up') do
-          puts 'params'
-          puts r
           sign_up_params = SignUpParams.new.permit!(r.params)
           user           = Users::Creator.new(attributes: sign_up_params).call
           tokens         = AuthorizationTokensGenerator.new(user: user).call
@@ -96,6 +94,14 @@ class App < Roda
           Users::UpdateAuthenticationToken.new(user: current_user).call
 
           response.write(nil)
+        end
+
+        r.post('refresh_token') do
+          Users::UpdateAuthenticationToken.new(user: current_user).call
+
+          tokens = AuthorizationTokensGenerator.new(user: current_user).call
+
+          TokensSerializer.new(tokens: tokens).render
         end
       end
     end
