@@ -2,7 +2,7 @@
 
 # {ApplicationParams} is base class that contains configuration
 # that is used accross all params validator classes.
-class ApplicationParams < Dry::Validator::Contract
+class ApplicationParams < Dry::Validation::Contract
   # It checks if passed params are valid base on params validation rules in child class.
   # If params are invalid {Exceptions::InvalidParamsError} is raised.
   #
@@ -14,7 +14,7 @@ class ApplicationParams < Dry::Validator::Contract
   def permit!(params)
     params = self.class.new.call(params)
 
-    raise(invalid_params_error(params)) if params.error.any?
+    raise(invalid_params_error(params)) if params.errors.any?
 
     params.to_h
   end
