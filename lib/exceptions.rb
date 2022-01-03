@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # {Exceptions} module defines error classes that are used in application.
-module Exception
+module Exceptions
   # {Exceptions::InvalidParamsError} is an error which is raised when invalid params are passed to the endpoint.
   class InvalidParamsError < StandardError
     attr_reader :object

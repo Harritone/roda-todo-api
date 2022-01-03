@@ -10,7 +10,7 @@ class ApplicationParams < Dry::Validation::Contract
   #
   # @return [Hash] Hash when provided params are valid.
   #
-  # @raise [InvalidParamsError] {Exception::InvalidParamsError} when provided params are not valid.
+  # @raise [InvalidParamsError] {Exceptions::InvalidParamsError} when provided params are not valid.
   def permit!(params)
     params = self.class.new.call(params)
 
