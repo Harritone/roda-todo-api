@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Todo, type: :model do
   describe 'name presence validation' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user)                        }
     let(:todo) { build(:todo, name: name, user: user) }
 
     before { todo.valid? }
