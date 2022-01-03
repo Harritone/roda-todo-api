@@ -33,7 +33,7 @@ class App < Roda
       response.status = 500
     end
 
-    respnse.write(error_object.to_json)
+    response.write(error_object.to_json)
   end
 
   # Allows the default headers for responses.
@@ -46,4 +46,24 @@ class App < Roda
 
   # Adds request routing methods for all http verbs
   plugin :all_verbs
+
+  # The json_parser plugin parses request bodies in JSON format if the request's content type specifies JSON.
+  # This is mostly designed for use with JSON API sites.
+  plugin :json_parser
+
+  route do |r|
+    r.on('api') do
+      r.on('v1') do
+        r.post('sign_up') do
+          puts 'params'
+          puts r
+          sign_up_params = SignUpParams.new.permit!(r.params)
+          user           = Users::Creator.new(attributes: sign_up_params).call
+          tokens         = AuthorizationTokensGenerator.new(user: user).call
+
+          UserSerializer.new(user: user, tokens: tokens).render
+        end
+      end
+    end
+  end
 end
