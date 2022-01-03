@@ -94,6 +94,4 @@ group :development, :test do
 
   # Rack::Test is a layer on top of Rack's MockRequest similar to Merb's RequestHelper.
   gem 'rack-test'
-
-  gem 'byebug'
 end
