@@ -66,6 +66,14 @@ class App < Roda
 
           UserSerializer.new(user: user, tokens: tokens).render
         end
+
+        r.post('login') do
+          login_params = LoginParams.new.permit!(r.params)
+          user         = Users::Authenticator.new(email: login_params[:email], password: login_params[:password]).call
+          tokens       = AuthorizationTokensGenerator.new(user: user).call
+
+          UserSerializer.new(user: user, tokens: tokens).render
+        end
       end
     end
   end
