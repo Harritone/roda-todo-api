@@ -35,9 +35,6 @@ class App < Roda
       error_object    = { error: I18n.t('invalid_authorization_token') }
       response.status = 401
     else
-      pp e
-      puts '***'
-      pp e.trace
       error_object    = { error: I18n.t('something_went_wrong') }
       response.status = 500
     end
@@ -117,6 +114,13 @@ class App < Roda
             todos        = TodosQuery.new(dataset: current_user.todos_dataset, params: todos_params).call
 
             TodosSerializer.new(todos: todos).render
+          end
+
+          r.post do
+            todo_params = TodoParams.new.permit!(r.params)
+            todo        = Todos::Creator.new(user: current_user, attributes: todo_params).call
+
+            TodoSerializer.new(todo: todo).render
           end
         end
       end
