@@ -10,7 +10,7 @@ class TodosSerializer < ApplicationSerializer
   # @return [Hash] object with multiple todos ({Todo}) details.
   def to_json
     {
-      todo: todos
+      todos: todos
     }
   end
 
