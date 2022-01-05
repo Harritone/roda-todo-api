@@ -128,6 +128,12 @@ class App < Roda
 
               TodoSerializer.new(todo: updated_todo).render
             end
+
+            r.delete do
+              todo.delete
+
+              response.write(nil)
+            end
           end
 
           r.get do
