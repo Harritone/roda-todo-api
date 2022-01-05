@@ -3,3 +3,6 @@
 /doc/*
 .yardoc/*
 .devcontainer
+Dockerfile
+docker-compose.yml
+createdb.sql
