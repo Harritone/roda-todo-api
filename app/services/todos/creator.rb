@@ -10,7 +10,7 @@ module Todos
       @attributes = attributes
     end
 
-    # It creates {Todo} object for specified {User} based on the passed attribures.
+    # It creates {Todo} object for specified {User} based on the passed attributes.
     #
     # @return [Todo] object when attributes are valid.
     #
