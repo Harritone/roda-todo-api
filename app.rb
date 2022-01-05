@@ -80,6 +80,12 @@ class App < Roda
   route do |r|
     r.on('api') do
       r.on('v1') do
+        r.on('delete_account') do
+          DeleteAccountWorker.perform_async(current_user.id)
+
+          response.write(nil)
+        end
+
         r.post('sign_up') do
           sign_up_params = SignUpParams.new.permit!(r.params)
           user           = Users::Creator.new(attributes: sign_up_params).call
