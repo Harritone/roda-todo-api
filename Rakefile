@@ -50,4 +50,9 @@ namespace :db do
   task :seed do
     sh %(ruby db/seeds.rb)
   end
+
+  desc 'Generate project documentation using yard.'
+  task :docs do
+    sh %(yard doc *.rb app/ lib/)
+  end
 end
