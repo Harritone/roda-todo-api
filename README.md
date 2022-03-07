@@ -2,7 +2,7 @@
 
 JSON API for todo project build with Roda + sequel
 
-### Clone the Repoa
+### Clone the Repo
 
 ```shell
 git clone git@github.com:Harritone/roda-todo-api.git
